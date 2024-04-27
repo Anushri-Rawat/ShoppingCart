@@ -12,15 +12,15 @@ import {
   CardContent,
   Stack,
   Typography,
+  Box,
 } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
 
   const formSubmitHandler = (values) => {
-    const user = users.find((user) => user.email === values.email);
     if (!user) {
       toast.error("Email or password is invalid.");
       return;
@@ -28,6 +28,7 @@ const Login = () => {
 
     if (user.password === values.password) {
       dispatch(login());
+      toast.success("User successfully logged in.");
       navigate("/");
     } else {
       toast.error("Email or password is invalid.");
@@ -89,15 +90,25 @@ const Login = () => {
               error={Boolean(touched.password && errors.password)}
               helperText={touched.password && errors.password}
             />
-            <Button type="submit" variant="contained" color="primary">
-              Login
-            </Button>
-            <Link
-              to="/register"
-              style={{ paddingLeft: "10px", fontSize: "12px" }}
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
             >
-              New User?Register here
-            </Link>
+              <Button type="submit" variant="contained" color="secondary">
+                Login
+              </Button>
+              <Link
+                to="/register"
+                style={{
+                  paddingLeft: "10px",
+                  fontSize: "12px",
+                  color: "#000",
+                }}
+              >
+                New User? Register here
+              </Link>
+            </Box>
           </form>
         </CardContent>
       </Card>

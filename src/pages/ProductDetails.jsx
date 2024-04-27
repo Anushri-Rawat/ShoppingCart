@@ -55,7 +55,7 @@ const ProductDetails = () => {
     >
       category
     </Link>,
-    <Typography key="2" color="text.primary">
+    <Typography key="2" color="error">
       {product?.category}
     </Typography>,
   ];
@@ -143,6 +143,7 @@ const ProductDetails = () => {
                 variant="contained"
                 endIcon={<ShoppingCartOutlinedIcon />}
                 onClick={handleSubmit}
+                color="secondary"
               >
                 Add to Cart
               </Button>

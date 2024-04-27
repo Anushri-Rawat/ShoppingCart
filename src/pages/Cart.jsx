@@ -83,7 +83,11 @@ const Cart = () => {
             <Typography variant="body1">
               Your cart is currently empty!
             </Typography>
-            <Button variant="contained" onClick={() => navigate("/")}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => navigate("/")}
+            >
               <ArrowLeftIcon />
               Continue Shopping
             </Button>
@@ -193,7 +197,7 @@ const Cart = () => {
                 </Typography>
                 <Button
                   variant="contained"
-                  color="primary"
+                  color="secondary"
                   onClick={handleCheckout}
                 >
                   Check out

@@ -66,7 +66,7 @@ const ListProducts = () => {
                 component={Link}
                 to={`/product/${id}`}
                 variant="contained"
-                color="primary"
+                color="secondary"
               >
                 Details
               </Button>

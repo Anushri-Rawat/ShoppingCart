@@ -6,12 +6,14 @@ import {
   CardContent,
   Stack,
   Typography,
+  Box,
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { addUser } from "../features/userSlice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const dispatch = useDispatch();
@@ -27,22 +29,23 @@ const Register = () => {
       validationSchema: Yup.object({
         email: Yup.string().email("Invalid email address").required("Required"),
         firstName: Yup.string()
-          .min(2, "Must be at least 2 characters")
+          .min(2, "Firstname must be at least 2 characters")
           .required("Required"),
         lastName: Yup.string()
-          .min(2, "Must be at least 2 characters")
+          .min(2, "Lastname must be at least 2 characters")
           .required("Required"),
         password: Yup.string()
           .required("Required")
-          .min(8, "Must be at least 8 characters")
-          .max(16, "Must be less than 16 characters")
+          .min(8, "Password must be at least 8 characters")
+          .max(16, "Password must be less than 16 characters")
           .matches(
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/,
-            "Must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+            "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
           ),
       }),
       onSubmit: (values) => {
         dispatch(addUser(values));
+        toast.success("User successfully registered.");
         navigate("/login");
       },
     });
@@ -118,10 +121,21 @@ const Register = () => {
               error={Boolean(touched.password && errors.password)}
               helperText={touched.password && errors.password}
             />
-            <Button type="submit" variant="contained" color="primary">
-              Register
-            </Button>
-            <Link to="/login" style={{paddingLeft:"10px",fontSize:"12px"}}>Already a User?Login here</Link>
+            <Box
+              display="flex"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Button type="submit" variant="contained" color="secondary">
+                Register
+              </Button>
+              <Link
+                to="/login"
+                style={{ paddingLeft: "10px", fontSize: "12px", color: "#000" }}
+              >
+                Already a User?Login here
+              </Link>
+            </Box>
           </form>
         </CardContent>
       </Card>

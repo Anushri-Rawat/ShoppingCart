@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../features/userSlice";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery } from "@mui/material";
+import { clearCart } from "../features/cartSlice";
 
 const Header = () => {
   const theme = useTheme();
@@ -25,6 +26,7 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logout());
+    dispatch(clearCart());
     navigate("/login");
   };
   return (
@@ -56,7 +58,7 @@ const Header = () => {
           <Button component={RouterLink} to="/cart" color="inherit" edge="end">
             <Badge
               badgeContent={`${cartTotalQuantity}`}
-              color="success"
+              color="secondary"
               max={99}
             >
               <ShoppingCartIcon />

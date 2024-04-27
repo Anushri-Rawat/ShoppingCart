@@ -5,7 +5,11 @@ const initialState = {
   cartItems: localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
     : [],
-  cartTotalQuantity: 0,
+  cartTotalQuantity:
+    JSON.parse(localStorage.getItem("cartItems"))?.reduce(
+      (acc, i) => acc + i.itemQuantity,
+      0
+    ) || 0,
   cartTotalAmount: 0,
 };
 
@@ -24,6 +28,7 @@ export const cartSlice = createSlice({
             state.cartItems[existingItemIdx].itemQuantity +
             action.payload.itemQuantity,
         };
+        //toast.success("Product quantity increased in cart");
       } else {
         state.cartItems.push(action.payload);
         toast.success("Product added to cart");

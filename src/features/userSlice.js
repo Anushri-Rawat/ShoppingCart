@@ -1,8 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  users: [],
-  isAuthenticated: false,
+  user: localStorage.getItem("shopVistaUser")
+    ? JSON.parse(localStorage.getItem("shopVistaUser"))
+    : null,
+  isAuthenticated: localStorage.getItem("shopVistaUser") ? true : false,
 };
 
 export const userSlice = createSlice({
@@ -10,13 +12,16 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     addUser: (state, action) => {
-      state.users.push(action.payload);
+      state.user = action.payload;
+      localStorage.setItem("shopVistaUser", JSON.stringify(state.user));
     },
     login: (state) => {
       state.isAuthenticated = true;
     },
     logout: (state) => {
       state.isAuthenticated = false;
+      state.user = null;
+      localStorage.removeItem("shopVistaUser");
     },
   },
 });
