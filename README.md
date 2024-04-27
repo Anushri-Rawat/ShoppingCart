@@ -1,8 +1,29 @@
-# React + Vite
+## Deployed Link
+https://shopping-cart-taupe-nine.vercel.app/
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Technologies Used 
+React, Javascript, Redux, Formik, Yup, Material UI and Vite
 
-Currently, two official plugins are available:
+## Features
+- Signup with form validation for email, first name, last name, and password.
+- Login with authentication of registered credentials.
+- View all products from an external API ([Fake Store API](https://fakestoreapi.com/)).
+- View details of a single product.
+- Add/Delete/Update products to the shopping cart.
+- Error handling with alerts.
+- Filter products based on category.
+- Two types of display formats for the product list, namely grid and list view.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Getting Started
+
+```bash
+# Clone Repository
+$ git clone https://github.com/Anushri-Rawat/ShoppingCart.git
+
+# Install Dependencies
+$ npm i
+
+# Run Aplication
+$ npm run dev
+
+```
