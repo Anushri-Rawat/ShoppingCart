@@ -8,6 +8,7 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import PrivateRoutes from "./components/PrivateRoutes";
 import { useSelector } from "react-redux";
+import NotFoundPage from "./pages/NotFoundPage";
 
 function App() {
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -27,6 +28,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<ProductDetails />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
       <ToastContainer
