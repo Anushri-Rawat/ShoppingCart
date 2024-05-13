@@ -9,6 +9,7 @@ const initialState = {
   category: [],
   filter: "All",
   grid_view: true,
+  sort: "reset",
 };
 
 const API_URL = "https://fakestoreapi.com";
@@ -49,6 +50,9 @@ export const productSlice = createSlice({
     setFilterValue: (state, action) => {
       state.filter = action.payload;
     },
+    setSort: (state, action) => {
+      state.sort = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchAllProducts.pending, (state, action) => {
@@ -80,7 +84,7 @@ export const productSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setGridView, setListView, setFilterValue } =
+export const { setGridView, setListView, setFilterValue, setSort } =
   productSlice.actions;
 
 export default productSlice.reducer;

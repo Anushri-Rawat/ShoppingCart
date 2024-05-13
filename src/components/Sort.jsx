@@ -16,11 +16,12 @@ import {
   setFilterValue,
   setGridView,
   setListView,
+  setSort,
 } from "../features/productSlice";
 
 const Sort = () => {
   const dispatch = useDispatch();
-  const { products, grid_view, category } = useSelector(
+  const { products, grid_view, category, sort } = useSelector(
     (state) => state.product
   );
   const [filter, setFilter] = useState("All");
@@ -65,15 +66,21 @@ const Sort = () => {
       </Hidden>
 
       <Grid item>
-        {/* <FormControl fullWidth sx={{ width: "150px" }} size="small">
+        <FormControl
+          fullWidth
+          sx={{ width: "150px", marginRight: "10px" }}
+          size="small"
+        >
           <InputLabel htmlFor="sort">Sort</InputLabel>
-          <Select value="">
+          <Select
+            value={sort}
+            onChange={(e) => dispatch(setSort(e.target.value))}
+          >
+            <MenuItem value="reset">Reset Sort</MenuItem>
             <MenuItem value="lowest">Price (lowest)</MenuItem>
             <MenuItem value="highest">Price (highest)</MenuItem>
-            <MenuItem value="a-z">Price (a-z)</MenuItem>
-            <MenuItem value="z-a">Price (z-a)</MenuItem>
           </Select>
-        </FormControl> */}
+        </FormControl>
         <FormControl fullWidth sx={{ width: "150px" }} size="small">
           <InputLabel htmlFor="category">Category</InputLabel>
           <Select value={filter} onChange={(e) => setFilter(e.target.value)}>

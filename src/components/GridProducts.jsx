@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Grid,
   Card,
@@ -12,13 +12,27 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const GridProducts = () => {
-  const { products, filter } = useSelector((state) => state.product);
+  const { products, filter, sort } = useSelector((state) => state.product);
   const navigate = useNavigate();
 
   let filteredData = products;
   if (filter !== "All") {
     filteredData = products.filter((item) => item.category === filter);
   }
+
+  if (sort == "lowest") {
+    let sortedProducts = [...filteredData];
+    sortedProducts.sort((a, b) => {
+      return parseFloat(a.price) - parseFloat(b.price);
+    });
+    filteredData = sortedProducts;
+  } else if (sort == "highest") {
+    let sortedProducts = [...filteredData];
+    sortedProducts.sort((a, b) => {
+      return parseFloat(b.price) - parseFloat(a.price);
+    });
+    filteredData = sortedProducts;
+  } else filteredData = filteredData;
 
   return (
     <Grid container spacing={2} justifyContent="center">

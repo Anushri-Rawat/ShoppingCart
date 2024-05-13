@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Grid,
@@ -13,13 +13,29 @@ import { useSelector } from "react-redux";
 import Stars from "./Stars";
 
 const ListProducts = () => {
-  const { products, filter } = useSelector((state) => state.product);
+  const { products, filter, sort } = useSelector((state) => state.product);
   const navigate = useNavigate();
 
   let filteredData = products;
   if (filter !== "All") {
     filteredData = products.filter((item) => item.category === filter);
   }
+
+  useEffect(()=>{
+    if (sort == "lowest") {
+      let sortedProducts = [...filteredData];
+      sortedProducts.sort((a, b) => {
+        return parseFloat(a.price) - parseFloat(b.price);
+      });
+      filteredData = sortedProducts;
+    } else if (sort == "highest") {
+      let sortedProducts = [...filteredData];
+      sortedProducts.sort((a, b) => {
+        return parseFloat(b.price) - parseFloat(a.price);
+      });
+      filteredData = sortedProducts;
+    } else filteredData = filteredData;
+  },[sort])
 
   return (
     <Grid container spacing={2} justifyContent="center">
