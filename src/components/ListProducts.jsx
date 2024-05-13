@@ -21,21 +21,19 @@ const ListProducts = () => {
     filteredData = products.filter((item) => item.category === filter);
   }
 
-  useEffect(()=>{
-    if (sort == "lowest") {
-      let sortedProducts = [...filteredData];
-      sortedProducts.sort((a, b) => {
-        return parseFloat(a.price) - parseFloat(b.price);
-      });
-      filteredData = sortedProducts;
-    } else if (sort == "highest") {
-      let sortedProducts = [...filteredData];
-      sortedProducts.sort((a, b) => {
-        return parseFloat(b.price) - parseFloat(a.price);
-      });
-      filteredData = sortedProducts;
-    } else filteredData = filteredData;
-  },[sort])
+  if (sort == "lowest") {
+    let sortedProducts = [...filteredData];
+    sortedProducts.sort((a, b) => {
+      return parseFloat(a.price) - parseFloat(b.price);
+    });
+    filteredData = sortedProducts;
+  } else if (sort == "highest") {
+    let sortedProducts = [...filteredData];
+    sortedProducts.sort((a, b) => {
+      return parseFloat(b.price) - parseFloat(a.price);
+    });
+    filteredData = sortedProducts;
+  } else filteredData = filteredData;
 
   return (
     <Grid container spacing={2} justifyContent="center">
